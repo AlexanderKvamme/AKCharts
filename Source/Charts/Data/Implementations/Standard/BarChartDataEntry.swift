@@ -25,35 +25,38 @@ open class BarChartDataEntry: ChartDataEntry
     /// the sum of all positive values this entry (if stacked) contains
     private var _positiveSum: Double = 0.0
     
+    var z: Double = 0
+    
     public required init()
     {
         super.init()
     }
     
     /// Constructor for normal bars (not stacked).
-    public override init(x: Double, y: Double)
+    public init(x: Double, y: Double, z: Double)
     {
+        self.z = z
         super.init(x: x, y: y)
     }
     
     /// Constructor for normal bars (not stacked).
     public convenience init(x: Double, y: Double, data: Any?)
     {
-        self.init(x: x, y: y)
+        self.init(x: x, y: y, z: 9.1)
         self.data = data
     }
     
     /// Constructor for normal bars (not stacked).
     public convenience init(x: Double, y: Double, icon: NSUIImage?)
     {
-        self.init(x: x, y: y)
+        self.init(x: x, y: y, z: 9.1)
         self.icon = icon
     }
     
     /// Constructor for normal bars (not stacked).
     public convenience init(x: Double, y: Double, icon: NSUIImage?, data: Any?)
     {
-        self.init(x: x, y: y)
+        self.init(x: x, y: y, z: 9.1)
         self.icon = icon
         self.data = data
     }

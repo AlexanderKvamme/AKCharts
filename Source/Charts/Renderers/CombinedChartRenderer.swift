@@ -57,7 +57,7 @@ open class CombinedChartRenderer: NSObject, DataRenderer
             case .bar:
                 if chart.barData !== nil
                 {
-                    _renderers.append(BarChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
+                    _renderers.append(MyBarChartRenderer(dataProvider: chart, animator: animator, viewPortHandler: viewPortHandler))
                 }
 
             case .line:
