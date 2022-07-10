@@ -16,6 +16,16 @@ import CoreGraphics
     import UIKit
 #endif
 
+
+open class MyBarChartRenderer: BarChartRenderer {
+    
+}
+
+
+
+
+
+
 open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 {
     /// A nested array of elements ordered logically (i.e not in visual/drawing order) for use with VoiceOver
@@ -80,6 +90,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         }
     }
     
+    // FIXME: Seems like CGRects are calculated here, and drawn later
     private func prepareBuffer(dataSet: BarChartDataSetProtocol, index: Int)
     {
         guard
@@ -245,9 +256,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     bottom *= phaseY
                 }
 
-                let barRect = CGRect(x: left, y: top,
+                let barRect = CGRect(x: left,
+                                     y: e.z,
                                      width: right - left,
-                                     height: bottom - top)
+                                     height: e.y)
+//                let barRect = CGRect(x: left, y: e.z, width: right - left, height: e.z)
                 _buffers[index][bufferIndex] = barRect
                 bufferIndex += 1
             }
@@ -373,13 +386,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             guard viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width) else { continue }
             guard viewPortHandler.isInBoundsRight(barRect.origin.x) else { break }
 
+            let clipPath: CGPath = UIBezierPath(roundedRect: barRect, cornerRadius: 8).cgPath
+            context.addPath(clipPath)
             if !isSingleColor
             {
                 // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
                 context.setFillColor(dataSet.color(atIndex: j).cgColor)
             }
-            
-            context.fill(barRect)
+            context.closePath()
+            context.fillPath()
             
             if drawBorder
             {
@@ -482,7 +497,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     for j in range
                     {
                         guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
-                        
                         let rect = buffer[j]
                         
                         let x = rect.origin.x + rect.size.width / 2.0

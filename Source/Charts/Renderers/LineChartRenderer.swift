@@ -293,7 +293,7 @@ open class LineChartRenderer: LineRadarRenderer
         }
     }
     
-    private var _lineSegments = [CGPoint](repeating: CGPoint(), count: 2)
+    public var _lineSegments = [CGPoint](repeating: CGPoint(), count: 2)
     
     @objc open func drawLinear(context: CGContext, dataSet: LineChartDataSetProtocol)
     {
@@ -803,7 +803,7 @@ open class LineChartRenderer: LineRadarRenderer
         context.restoreGState()
     }
 
-    func drawGradientLine(context: CGContext, dataSet: LineChartDataSetProtocol, spline: CGPath, matrix: CGAffineTransform)
+    public func drawGradientLine(context: CGContext, dataSet: LineChartDataSetProtocol, spline: CGPath, matrix: CGAffineTransform)
     {
         guard let gradientPositions = dataSet.gradientPositions else
         {
