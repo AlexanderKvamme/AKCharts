@@ -95,15 +95,14 @@ open class LineChartRenderer: LineRadarRenderer
     {
         guard let dataProvider = dataProvider else { return }
         
+        // Transformers just translates and stretches the content to fit the graph
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
         
         let phaseY = animator.phaseY
         
         _xBounds.set(chart: dataProvider, dataSet: dataSet, animator: animator)
         
-        // get the color that is specified for this position from the DataSet
         let drawingColor = dataSet.colors.first!
-        
         let intensity = dataSet.cubicIntensity
         
         // the path for the cubic-spline
@@ -367,7 +366,7 @@ open class LineChartRenderer: LineRadarRenderer
 
                 if (!viewPortHandler.isInBoundsRight(_lineSegments[0].x))
                 {
-                    break
+//                    break
                 }
 
                 // Determine the start and end coordinates of the line, and make sure they differ.
@@ -516,6 +515,7 @@ open class LineChartRenderer: LineRadarRenderer
     
     open override func drawValues(context: CGContext)
     {
+        return
         guard
             let dataProvider = dataProvider,
             let lineData = dataProvider.lineData

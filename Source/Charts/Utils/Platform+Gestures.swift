@@ -127,7 +127,6 @@ extension NSUIPanGestureRecognizer
         return 1
     }
 
-    /// FIXME: Currently there are no more than 1 touch in OSX gestures, and not way to create custom touch gestures.
     final func nsuiLocationOfTouch(_ touch: Int, inView: NSView?) -> NSPoint
     {
         return super.location(in: inView)
@@ -136,7 +135,6 @@ extension NSUIPanGestureRecognizer
 
 extension NSUIRotationGestureRecognizer
 {
-    /// FIXME: Currently there are no velocities in OSX gestures, and not way to create custom touch gestures.
     final var velocity: CGFloat
     {
         return 0.1
@@ -163,7 +161,6 @@ extension NSUIPinchGestureRecognizer
         }
     }
 
-    /// FIXME: Currently there are no more than 1 touch in OSX gestures, and not way to create custom touch gestures.
     final func nsuiLocationOfTouch(_ touch: Int, inView view: NSView?) -> NSPoint
     {
         return super.location(in: view)

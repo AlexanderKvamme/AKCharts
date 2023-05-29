@@ -17,12 +17,10 @@ import CoreGraphics
 #endif
 
 
+// FIXME: Consider moving this to a seperate class
 open class MyBarChartRenderer: BarChartRenderer {
     
 }
-
-
-
 
 
 
@@ -260,7 +258,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                                      y: e.z,
                                      width: right - left,
                                      height: e.y)
-//                let barRect = CGRect(x: left, y: e.z, width: right - left, height: e.z)
                 _buffers[index][bufferIndex] = barRect
                 bufferIndex += 1
             }
@@ -385,6 +382,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             
             guard viewPortHandler.isInBoundsLeft(barRect.origin.x + barRect.size.width) else { continue }
             guard viewPortHandler.isInBoundsRight(barRect.origin.x) else { break }
+            
+            // Dont draw the bar if any part of it would exceed the chart
+            if barRect.minX < 0 {
+                continue
+            }
+            
+            // Dont draw the bar if any part of it would exceed the chart
+            if barRect.origin.x >= viewPortHandler.chartWidth*dataProvider.barData!.barWidth + barRect.width {
+                continue
+            }
+            
+            // TODO: Dont draw the right one
 
             let clipPath: CGPath = UIBezierPath(roundedRect: barRect, cornerRadius: 8).cgPath
             context.addPath(clipPath)

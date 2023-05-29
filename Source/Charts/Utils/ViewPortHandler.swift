@@ -117,12 +117,15 @@ open class ViewPortHandler: NSObject
     
     @objc open var contentLeft: CGFloat
     {
-        return contentRect.origin.x
+        // FIXME: Magic Number: DET ER HER JEG KAN TWEAKE CONTENT INSET LEFT
+        return contentRect.origin.x + 5
     }
     
     @objc open var contentRight: CGFloat
     {
-        return contentRect.origin.x + contentRect.size.width
+        // FIXME: Magic number:
+        // + er linje mer til høyre?
+        return contentRect.origin.x + contentRect.size.width + 6.5
     }
     
     @objc open var contentBottom: CGFloat

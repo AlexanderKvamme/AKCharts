@@ -272,7 +272,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 			}
             set
             {
-                // FIXME: We can't disable  scrolling it on OSX
+                // We can't disable  scrolling it on OSX
             }
 		}
     }
