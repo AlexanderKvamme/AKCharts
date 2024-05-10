@@ -35,7 +35,7 @@ open class CombinedHighlighter: ChartHighlighter
             let dataObjects = chart.combinedData?.allData
             else { return vals }
         
-        for (i, dataObject) in dataObjects.indexed()
+        for (i, dataObject) in dataObjects.enumerated()
         {
             // in case of BarData, let the BarHighlighter take over
             if barHighlighter != nil && dataObject is BarChartData,

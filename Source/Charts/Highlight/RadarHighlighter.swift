@@ -37,31 +37,32 @@ open class RadarHighlighter: PieRadarHighlighter
     /// The Highlight objects give information about the value at the selected index and DataSet it belongs to.
     internal func getHighlights(forIndex index: Int) -> [Highlight]
     {
-        var vals = [Highlight]()
-        
-        guard
-            let chart = self.chart as? RadarChartView,
-            let chartData = chart.data
-            else { return vals }
-        
-        let phaseX = chart.chartAnimator.phaseX
-        let phaseY = chart.chartAnimator.phaseY
-        let sliceangle = chart.sliceAngle
-        let factor = chart.factor
-
-        for (i, dataSet) in chartData.indexed()
-        {
-            guard let entry = dataSet.entryForIndex(index) else { continue }
-            
-            let y = (entry.y - chart.chartYMin)
-            
-            let p = chart.centerOffsets.moving(distance: CGFloat(y) * factor * CGFloat(phaseY),
-                                               atAngle: sliceangle * CGFloat(index) * CGFloat(phaseX) + chart.rotationAngle)
-
-            let highlight = Highlight(x: Double(index), y: entry.y, xPx: p.x, yPx: p.y, dataSetIndex: i, axis: dataSet.axisDependency)
-            vals.append(highlight)
-        }
-        
-        return vals
+        return []
+//        var vals = [Highlight]()
+//        
+//        guard
+//            let chart = self.chart as? RadarChartView,
+//            let chartData = chart.data
+//            else { return vals }
+//        
+//        let phaseX = chart.chartAnimator.phaseX
+//        let phaseY = chart.chartAnimator.phaseY
+//        let sliceangle = chart.sliceAngle
+//        let factor = chart.factor
+//
+//        for (i, dataSet) in chartData.indexed()
+//        {
+//            guard let entry = dataSet.entryForIndex(index) else { continue }
+//            
+//            let y = (entry.y - chart.chartYMin)
+//            
+//            let p = chart.centerOffsets.moving(distance: CGFloat(y) * factor * CGFloat(phaseY),
+//                                               atAngle: sliceangle * CGFloat(index) * CGFloat(phaseX) + chart.rotationAngle)
+//
+//            let highlight = Highlight(x: Double(index), y: entry.y, xPx: p.x, yPx: p.y, dataSetIndex: i, axis: dataSet.axisDependency)
+//            vals.append(highlight)
+//        }
+//        
+//        return vals
     }
 }
